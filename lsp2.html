@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSP SMKN 1 KONAWE | Lembaga Sertifikasi Profesi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lsp: {
+                            green: '#047857',      /* Emerald 700 */
+                            greenlight: '#10B981', /* Emerald 500 */
+                            greendark: '#064E3B',  /* Emerald 900 */
+                            yellow: '#F59E0B',     /* Amber 500 */
+                            yellowlight: '#FBBF24',/* Amber 400 */
+                            yellowdark: '#B45309', /* Amber 700 */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.6, transform: 'scale(1)' },
+                            '50%': { opacity: 0.9, transform: 'scale(1.05)' },
+                        }
+                    },
+                    animation: {
+                        float: 'float 4s ease-in-out infinite',
+                        shimmer: 'shimmer 2s infinite',
+                        glow: 'pulseGlow 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar & CSS effects */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #047857;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #064E3B;
+        }
+        .bg-mesh {
+            background-color: #ffffff;
+            background-image: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.1) 0px, transparent 50%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden bg-mesh">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-lsp-greendark via-lsp-green to-emerald-800 text-white text-xs py-2 px-4 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center gap-1.5"><i class="fas fa-certificate text-lsp-yellowlight"></i> BNSP Lisensi: <strong>BNSP-LSP-1892-ID</strong></span>
+                <span class="hidden md:inline">|</span>
+                <span class="hidden md:flex items-center gap-1.5"><i class="fas fa-[#25D366] fa-whatsapp text-emerald-300"></i> Hubungi WA: +62 822-9876-5432</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#pendaftaran" class="bg-lsp-yellow text-slate-900 font-bold px-2.5 py-0.5 rounded-full hover:bg-lsp-yellowlight transition text-[11px] shadow-sm flex items-center gap-1">
+                    <i class="fas fa-paper-plane"></i> Daftar Sertifikasi
+                </a>
+                <span class="text-white/60">|</span>
+                <button onclick="openLoginModal()" class="hover:text-lsp-yellowlight transition flex items-center gap-1">
+                    <i class="fas fa-lock"></i> Portal Login
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand -->
+                <a href="#beranda" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-lsp-green to-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition duration-300 border-2 border-lsp-yellow">
+                        <i class="fas fa-award text-2xl text-lsp-yellowlight"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-extrabold text-xl text-lsp-greendark tracking-tight">LSP</span>
+                            <span class="bg-lsp-yellow/20 text-lsp-yellowdark text-xs font-bold px-1.5 py-0.5 rounded border border-lsp-yellow/40">P1</span>
+                        </div>
+                        <p class="text-xs font-medium text-slate-500 tracking-wider">SMK NEGERI 1 KONAWE</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden lg:flex items-center space-x-1 font-medium text-slate-700 text-sm">
+                    <a href="#beranda" class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition font-semibold text-lsp-green">Beranda</a>
+
+                    <!-- Profil LSP Dropdown -->
+                    <div class="relative group">
+                        <button class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition flex items-center gap-1">
+                            Profil LSP <i class="fas fa-chevron-down text-xs opacity-60 group-hover:rotate-180 transition"></i>
+                        </button>
+                        <div class="absolute left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 transform group-hover:translate-y-1">
+                            <a href="#profil-sejarah" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-history text-lsp-yellow w-5"></i> Sejarah LSP</a>
+                            <a href="#profil-visimisi" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-bullseye text-lsp-yellow w-5"></i> Visi & Misi</a>
+                            <a href="#profil-struktur" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-sitemap text-lsp-yellow w-5"></i> Struktur Organisasi</a>
+                            <a href="#profil-tugas" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-tasks text-lsp-yellow w-5"></i> Tugas & Fungsi</a>
+                            <a href="#profil-legalitas" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-file-contract text-lsp-yellow w-5"></i> Legalitas BNSP</a>
+                            <a href="#tuk" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-building text-lsp-yellow w-5"></i> Profil TUK</a>
+                        </div>
+                    </div>
+
+                    <a href="#skema" class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition">Skema Sertifikasi</a>
+                    <a href="#pendaftaran" class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition">Pendaftaran</a>
+                    <a href="#jadwal" class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition">Jadwal</a>
+                    <a href="#asesor" class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition">Asesor</a>
+                    <a href="#hasil" class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition">Hasil</a>
+
+                    <!-- More Dropdown -->
+                    <div class="relative group">
+                        <button class="px-3 py-2 rounded-lg hover:bg-emerald-50 hover:text-lsp-green transition flex items-center gap-1">
+                            Lainnya <i class="fas fa-chevron-down text-xs opacity-60 group-hover:rotate-180 transition"></i>
+                        </button>
+                        <div class="absolute right-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 transform group-hover:translate-y-1">
+                            <a href="#tuk" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-warehouse text-emerald-600 w-5"></i> Tempat Uji (TUK)</a>
+                            <a href="#download" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-download text-emerald-600 w-5"></i> Download Dokumen</a>
+                            <a href="#berita" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-newspaper text-emerald-600 w-5"></i> Berita & Galeri</a>
+                            <a href="#faq" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-question-circle text-emerald-600 w-5"></i> FAQ</a>
+                            <a href="#kontak" class="block px-4 py-2 hover:bg-emerald-50 hover:text-lsp-green transition"><i class="fas fa-envelope text-emerald-600 w-5"></i> Kontak</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Login & Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="openLoginModal()" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-lsp-green to-emerald-600 hover:from-lsp-greendark hover:to-lsp-green text-white px-5 py-2.5 rounded-xl font-semibold shadow-md shadow-emerald-700/20 hover:shadow-lg transition duration-300 transform hover:-translate-y-0.5 border-b-2 border-lsp-yellow">
+                        <i class="fas fa-user-lock text-lsp-yellowlight"></i> Portal Login
+                    </button>
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-600 hover:text-lsp-green hover:bg-slate-100 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-2xl max-h-[80vh] overflow-y-auto">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Beranda</a>
+            <div class="pl-3 border-l-2 border-lsp-yellow space-y-1 my-1">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Profil LSP</span>
+                <a href="#profil-sejarah" onclick="toggleMobileMenu()" class="block px-3 py-1.5 text-sm hover:text-lsp-green">Sejarah LSP</a>
+                <a href="#profil-visimisi" onclick="toggleMobileMenu()" class="block px-3 py-1.5 text-sm hover:text-lsp-green">Visi & Misi</a>
+                <a href="#profil-struktur" onclick="toggleMobileMenu()" class="block px-3 py-1.5 text-sm hover:text-lsp-green">Struktur Organisasi</a>
+                <a href="#profil-tugas" onclick="toggleMobileMenu()" class="block px-3 py-1.5 text-sm hover:text-lsp-green">Tugas & Fungsi</a>
+                <a href="#profil-legalitas" onclick="toggleMobileMenu()" class="block px-3 py-1.5 text-sm hover:text-lsp-green">Legalitas BNSP</a>
+            </div>
+            <a href="#skema" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Skema Sertifikasi</a>
+            <a href="#pendaftaran" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Pendaftaran Online</a>
+            <a href="#jadwal" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Jadwal Sertifikasi</a>
+            <a href="#asesor" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Asesor Kompetensi</a>
+            <a href="#tuk" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Tempat Uji (TUK)</a>
+            <a href="#hasil" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Hasil Asesmen</a>
+            <a href="#download" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Download Dokumen</a>
+            <a href="#berita" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Berita & Galeri</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">FAQ</a>
+            <a href="#kontak" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg font-medium hover:bg-emerald-50 hover:text-lsp-green">Kontak LSP</a>
+            <button onclick="openLoginModal(); toggleMobileMenu()" class="w-full mt-3 bg-lsp-green text-white py-2.5 rounded-xl font-bold flex items-center justify-center gap-2">
+                <i class="fas fa-sign-in-alt"></i> Masuk Portal Sistem
+            </button>
+        </div>
+    </header>
+
+    <!-- SECTION A: BERANDA (HERO & SLIDER & STATS) -->
+    <section id="beranda" class="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-white via-emerald-50/50 to-amber-50/40">
+        <!-- Background Glowing Orbs -->
+        <div class="absolute -top-20 -left-20 w-96 h-96 bg-lsp-green/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-lsp-yellow/20 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Content Left -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-amber-100 text-lsp-greendark font-semibold text-xs md:text-sm px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm animate-bounce">
+                        <i class="fas fa-[#25D366] fa-check-circle text-lsp-green"></i> Terlisensi Resmi BNSP Republik Indonesia
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                        Mewujudkan Tenaga Kerja Vokasi <span class="bg-gradient-to-r from-lsp-green to-emerald-600 bg-clip-text text-transparent">Kompeten & Tersertifikasi</span>
+                    </h1>
+                    <p class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Lembaga Sertifikasi Profesi (LSP) P1 SMKN 1 Konawe berkomitmen melahirkan lulusan berstandar nasional & internasional yang siap bersaing di Dunia Usaha dan Dunia Industri (DUDI).
+                    </p>
+                    
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#pendaftaran" class="bg-gradient-to-r from-lsp-green to-emerald-600 hover:from-emerald-700 hover:to-lsp-green text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-emerald-700/25 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-center gap-2 border-b-2 border-lsp-yellow">
+                            <i class="fas fa-file-signature"></i> Daftar Sertifikasi Online
+                        </a>
+                        <a href="#hasil" class="bg-white text-slate-700 hover:text-lsp-green hover:bg-slate-50 font-bold px-6 py-3.5 rounded-xl shadow-md border border-slate-200 transition duration-300 flex items-center gap-2">
+                            <i class="fas fa-search text-lsp-yellow"></i> Cek Status Sertifikat
+                        </a>
+                    </div>
+
+                    <!-- Quick Info Badges -->
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/80">
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Tipe LSP</p>
+                            <p class="text-sm font-bold text-slate-800">LSP P1 Sekolah</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">No. Lisensi</p>
+                            <p class="text-sm font-bold text-slate-800">BNSP-LSP-1892</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Lokasi TUK</p>
+                            <p class="text-sm font-bold text-slate-800">Kab. Konawe, Sultra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Dynamic Slider Right -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white group">
+                        <!-- Slider Carousel Container -->
+                        <div id="sliderContainer" class="relative h-80 sm:h-96 w-full overflow-hidden">
+                            <!-- Slide 1 -->
+                            <div class="slide-item absolute inset-0 transition-opacity duration-700 opacity-100 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), transparent), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80');">
+                                <span class="bg-lsp-yellow text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full w-max mb-2">Uji Kompetensi 2026</span>
+                                <h3 class="text-white font-bold text-xl">Pelaksanaan Asesmen Praktik Keahlian Vokasi</h3>
+                                <p class="text-slate-200 text-xs mt-1">Sertifikasi berstandar SKKNI untuk siswa tingkat akhir SMKN 1 Konawe.</p>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="slide-item absolute inset-0 transition-opacity duration-700 opacity-0 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), transparent), url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80');">
+                                <span class="bg-lsp-green text-white font-extrabold text-xs px-3 py-1 rounded-full w-max mb-2">Verifikasi TUK</span>
+                                <h3 class="text-white font-bold text-xl">Pengujian Laboratorium & Workshop Standar BNSP</h3>
+                                <p class="text-slate-200 text-xs mt-1">Fasilitas modern lengkap untuk mendukung kesuksesan para calon asesi.</p>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="slide-item absolute inset-0 transition-opacity duration-700 opacity-0 flex flex-col justify-end p-6 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.85), transparent), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80');">
+                                <span class="bg-amber-500 text-white font-extrabold text-xs px-3 py-1 rounded-full w-max mb-2">Kerjasama Industri</span>
+                                <h3 class="text-white font-bold text-xl">Peluang Kerja Langsung Bagi Lulusan Competent</h3>
+                                <p class="text-slate-200 text-xs mt-1">Kemitraan strategis bersama perusahaan terkemuka di Sulawesi Tenggara.</p>
+                            </div>
+                        </div>
+
+                        <!-- Slider Navigation Controls -->
+                        <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-800 p-2 rounded-full shadow-md transition">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-800 p-2 rounded-full shadow-md transition">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Floating Badge Card -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-slate-100 flex items-center gap-3 hidden sm:flex">
+                        <div class="w-12 h-12 rounded-full bg-emerald-100 text-lsp-green flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-bold uppercase">Tingkat Kelulusan</p>
+                            <p class="text-lg font-extrabold text-slate-800">98.4% Kompeten</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATISTIK PESERTA SERTIFIKASI -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:border-emerald-300 transition duration-300 transform hover:-translate-y-1 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-50 text-lsp-green flex items-center justify-center text-2xl mb-3 group-hover:bg-lsp-green group-hover:text-white transition">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-slate-800 counter" data-target="1450">0</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">Peserta Tersertifikasi</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:border-amber-300 transition duration-300 transform hover:-translate-y-1 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-50 text-lsp-yellowdark flex items-center justify-center text-2xl mb-3 group-hover:bg-lsp-yellow group-hover:text-slate-900 transition">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-slate-800 counter" data-target="5">0</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">Skema Keahlian</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:border-emerald-300 transition duration-300 transform hover:-translate-y-1 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-50 text-lsp-green flex items-center justify-center text-2xl mb-3 group-hover:bg-lsp-green group-hover:text-white transition">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-slate-800 counter" data-target="18">0</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">Asesor Bersertifikat</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:border-amber-300 transition duration-300 transform hover:-translate-y-1 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-50 text-lsp-yellowdark flex items-center justify-center text-2xl mb-3 group-hover:bg-lsp-yellow group-hover:text-slate-900 transition">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-slate-800 counter" data-target="24">0</h3>
+                    <p class="text-sm font-semibold text-slate-500 mt-1">Mitra Industri (DUDI)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SAMBUTAN KETUA LSP & INFORMASI TERBARU -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <!-- Sambutan Ketua LSP -->
+                <div class="lg:col-span-7 bg-slate-50 rounded-3xl p-8 border border-slate-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-lsp-yellow/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                        <div class="w-32 h-40 rounded-2xl overflow-hidden shadow-lg border-2 border-lsp-green flex-shrink-0 bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Ketua LSP" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-3">
+                            <span class="text-xs font-bold text-lsp-green uppercase tracking-wider bg-emerald-100 px-3 py-1 rounded-full">Sambutan Ketua LSP</span>
+                            <h3 class="text-2xl font-bold text-slate-900">Drs. H. Ahmad Sudrajat, M.Pd</h3>
+                            <p class="text-xs text-slate-500 font-medium">Ketua LSP P1 SMKN 1 Konawe</p>
+                            <p class="text-slate-600 text-sm leading-relaxed italic">
+                                "Selamat datang di website resmi LSP SMKN 1 Konawe. Sertifikasi kompetensi BNSP merupakan jaminan kualifikasi bagi siswa agar diakui secara nasional maupun internasional. Kami siap mendampingi setiap asesi meraih standar keahlian tertinggi."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengumuman & Informasi Terbaru -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-bullhorn text-lsp-yellow"></i> Pengumuman Terbaru
+                        </h3>
+                        <a href="#berita" class="text-xs font-bold text-lsp-green hover:underline">Lihat Semua</a>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="p-4 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 transition duration-200 flex gap-4 items-start">
+                            <div class="bg-emerald-700 text-white p-2.5 rounded-lg text-center font-bold text-xs min-w-[50px]">
+                                <span>15</span>
+                                <span class="block text-[10px] font-normal uppercase">AGU</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800 hover:text-lsp-green transition cursor-pointer">Pendaftaran Sertifikasi Gelombang II Tahun 2026 Dibuka</h4>
+                                <p class="text-xs text-slate-500 mt-1">Siswa kelas XII disilakan melengkapi berkas Form APL-01 & APL-02 online.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 transition duration-200 flex gap-4 items-start">
+                            <div class="bg-amber-500 text-white p-2.5 rounded-lg text-center font-bold text-xs min-w-[50px]">
+                                <span>22</span>
+                                <span class="block text-[10px] font-normal uppercase">AGU</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800 hover:text-lsp-green transition cursor-pointer">Pelaksanaan Witness & Re-Lisensi oleh Asesor BNSP</h4>
+                                <p class="text-xs text-slate-500 mt-1">Kegiatan audit kepatuhan lisensi bertempat di TUK Laboratorium RPL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION B: PROFIL LSP -->
+    <section id="profil" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Tentang Kami</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Profil LSP SMKN 1 Konawe</h2>
+                <p class="text-slate-600 mt-2">Mengenal lembaga sertifikasi mandiri penguji standar mutu kompetensi vokasi.</p>
+            </div>
+
+            <!-- Profile Interactive Tabs -->
+            <div class="bg-white rounded-3xl shadow-lg border border-slate-200 p-6 md:p-8">
+                <!-- Tab Menu Header -->
+                <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-4 mb-8">
+                    <button onclick="switchProfileTab('sejarah')" id="tab-sejarah" class="profile-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-lsp-green text-white shadow">
+                        <i class="fas fa-history mr-2"></i> Sejarah LSP
+                    </button>
+                    <button onclick="switchProfileTab('visimisi')" id="tab-visimisi" class="profile-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                        <i class="fas fa-bullseye mr-2"></i> Visi & Misi
+                    </button>
+                    <button onclick="switchProfileTab('struktur')" id="tab-struktur" class="profile-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                        <i class="fas fa-sitemap mr-2"></i> Struktur Organisasi
+                    </button>
+                    <button onclick="switchProfileTab('tugas')" id="tab-tugas" class="profile-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                        <i class="fas fa-tasks mr-2"></i> Tugas & Fungsi
+                    </button>
+                    <button onclick="switchProfileTab('legalitas')" id="tab-legalitas" class="profile-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                        <i class="fas fa-certificate mr-2"></i> Legalitas BNSP
+                    </button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="content-sejarah" class="profile-content space-y-4">
+                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-landmark text-lsp-green"></i> Sejarah Pendirian LSP SMKN 1 Konawe
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        LSP P1 SMKN 1 Konawe didirikan berdasarkan SK Kepala Sekolah Nomor 421.5/281/2019 dan secara resmi meraih lisensi lisensi dari Badan Nasional Sertifikasi Profesi (BNSP) Republik Indonesia. Pendirian LSP ditujukan untuk menjamin bahwa setiap lulusan SMKN 1 Konawe mengantongi sertifikat kompetensi yang valid dan diakui oleh Industri.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Dalam perkembangannya, LSP SMKN 1 Konawe terus menambah cakupan skema sertifikasi sesuai dengan tuntutan perkembangan teknologi digital dan revolusi industri 4.0 di wilayah Kabupaten Konawe dan Provinsi Sulawesi Tenggara.
+                    </p>
+                </div>
+
+                <div id="content-visimisi" class="profile-content hidden space-y-6">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100">
+                            <h4 class="text-xl font-bold text-lsp-greendark mb-3 flex items-center gap-2">
+                                <i class="fas fa-eye text-lsp-yellow"></i> VISI LSP
+                            </h4>
+                            <p class="text-slate-700 leading-relaxed font-medium">
+                                "Menjadi Lembaga Sertifikasi Profesi P1 yang independen, terpercaya, dan unggul secara nasional dalam mencetak tenaga kerja tingkat menengah yang profesional, berkarakter, serta berdaya saing global."
+                            </p>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100">
+                            <h4 class="text-xl font-bold text-amber-900 mb-3 flex items-center gap-2">
+                                <i class="fas fa-rocket text-lsp-yellow"></i> MISI LSP
+                            </h4>
+                            <ul class="space-y-2 text-slate-700 text-sm list-disc pl-5">
+                                <li>Menyelenggarakan sertifikasi kompetensi sesuai SKKNI yang akuntabel.</li>
+                                <li>Pengembangan skema sertifikasi berkelanjutan sejalan dengan kebutuhan DUDI.</li>
+                                <li>Pemeliharaan sistem manajemen mutu ISO 17024/BNSP secara konsisten.</li>
+                                <li>Meningkatkan kualitas Asesor Kompetensi dan fasilitas TUK.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-struktur" class="profile-content hidden">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6">Struktur Organisasi LSP SMKN 1 Konawe</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 bg-slate-50 border rounded-xl text-center">
+                            <div class="w-16 h-16 bg-lsp-green text-white rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-2">KS</div>
+                            <h5 class="font-bold text-sm">Ketua Dewan Pengarah</h5>
+                            <p class="text-xs text-slate-500">Kepala SMKN 1 Konawe</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 border rounded-xl text-center">
+                            <div class="w-16 h-16 bg-lsp-yellow text-slate-900 rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-2">KL</div>
+                            <h5 class="font-bold text-sm">Ketua LSP</h5>
+                            <p class="text-xs text-slate-500">Drs. H. Ahmad Sudrajat</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 border rounded-xl text-center">
+                            <div class="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-2">MM</div>
+                            <h5 class="font-bold text-sm">Manajer Mutu</h5>
+                            <p class="text-xs text-slate-500">Siti Rahmawati, S.T.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 border rounded-xl text-center">
+                            <div class="w-16 h-16 bg-amber-600 text-white rounded-full flex items-center justify-center mx-auto text-xl font-bold mb-2">MT</div>
+                            <h5 class="font-bold text-sm">Manajer Teknis Asesmen</h5>
+                            <p class="text-xs text-slate-500">Budi Santoso, S.Kom</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-tugas" class="profile-content hidden space-y-4">
+                    <h3 class="text-xl font-bold text-slate-900">Tugas & Fungsi LSP P1</h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="fas fa-check text-lsp-green text-lg mt-0.5"></i>
+                            <div><strong>Merencanakan & Melaksanakan Asesmen:</strong> Mengatur jalannya pengujian teori dan praktik untuk seluruh calon asesi.</div>
+                        </div>
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="fas fa-check text-lsp-green text-lg mt-0.5"></i>
+                            <div><strong>Penerbitan Sertifikat Kompetensi:</strong> Mengusulkan cetak blanko sertifikat resmi BNSP bagi peserta kompeten.</div>
+                        </div>
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="fas fa-check text-lsp-green text-lg mt-0.5"></i>
+                            <div><strong>Pengembangan Materi Uji (MUK):</strong> Menyusun kaji ulang soal dan lembar observasi yang sinkron dengan Industri.</div>
+                        </div>
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg">
+                            <i class="fas fa-check text-lsp-green text-lg mt-0.5"></i>
+                            <div><strong>Verifikasi Tempat Uji Kompetensi:</strong> Memastikan TUK memenuhi standar sarana prasarana BNSP.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-legalitas" class="profile-content hidden space-y-4">
+                    <div class="p-6 bg-gradient-to-r from-emerald-900 to-lsp-greendark text-white rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div>
+                            <span class="text-lsp-yellowlight text-xs font-bold uppercase tracking-wider">SK Lisensi BNSP</span>
+                            <h3 class="text-2xl font-bold mt-1">Keputusan Ketua BNSP No. KEP.1892/BNSP/VIII/2022</h3>
+                            <p class="text-xs text-slate-300 mt-2">Berlaku s/d: 28 Agustus 2027 | Status: Aktif Terlisensi Full Scope</p>
+                        </div>
+                        <button onclick="alert('Mengunduh Sertifikat Lisensi BNSP SMKN 1 Konawe PDF...')" class="bg-lsp-yellow text-slate-900 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-lsp-yellowlight transition flex-shrink-0">
+                            <i class="fas fa-file-pdf mr-1"></i> Unduh SK BNSP
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION C: SKEMA SERTIFIKASI JURUSAN 1 - 5 -->
+    <section id="skema" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Program Keahlian</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Skema Sertifikasi Kompetensi</h2>
+                <p class="text-slate-600 mt-2">Pilih jurusan untuk melihat rincian unit kompetensi & persyaratan peserta.</p>
+            </div>
+
+            <!-- Major Tabs Filter -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button onclick="filterJurusan('rpl')" id="jur-rpl" class="jurusan-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-lsp-green text-white shadow-md">
+                    <i class="fas fa-code mr-1.5"></i> Jurusan 1: Rekayasa Perangkat Lunak (RPL)
+                </button>
+                <button onclick="filterJurusan('tkr')" id="jur-tkr" class="jurusan-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                    <i class="fas fa-car mr-1.5"></i> Jurusan 2: Teknik Kendaraan Ringan (TKR)
+                </button>
+                <button onclick="filterJurusan('akl')" id="jur-akl" class="jurusan-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                    <i class="fas fa-calculator mr-1.5"></i> Jurusan 3: Akuntansi (AKL)
+                </button>
+                <button onclick="filterJurusan('otkp')" id="jur-otkp" class="jurusan-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                    <i class="fas fa-briefcase mr-1.5"></i> Jurusan 4: Manajemen Perkantoran (OTKP)
+                </button>
+                <button onclick="filterJurusan('atph')" id="jur-atph" class="jurusan-btn px-5 py-2.5 rounded-2xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-emerald-50">
+                    <i class="fas fa-seedling mr-1.5"></i> Jurusan 5: Agribisnis Tanaman (ATPH)
+                </button>
+            </div>
+
+            <!-- Major Detail Display Card -->
+            <div id="skemaDetailCard" class="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
+                <!-- Content injected via JS for selected major -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION D: PENDAFTARAN SERTIFIKASI ONLINE -->
+    <section id="pendaftaran" class="py-20 bg-gradient-to-br from-emerald-900 via-lsp-greendark to-slate-900 text-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <span class="bg-lsp-yellow text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase">Formulir Pendaftaran</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Pendaftaran Sertifikasi Online</h2>
+                <p class="text-slate-300 text-sm mt-2">Isi data calon asesi di bawah ini dengan akurat untuk proses pendaftaran.</p>
+            </div>
+
+            <div class="bg-white text-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <form id="regForm" onsubmit="handleRegistration(event)" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Nama Lengkap Asesi *</label>
+                            <input type="text" id="regName" required placeholder="Contoh: Andi Pratama" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-lsp-green focus:border-transparent outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">NISN / NIK *</label>
+                            <input type="number" id="regNisn" required placeholder="10 digit NISN" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-lsp-green focus:border-transparent outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Pilih Skema Keahlian *</label>
+                            <select id="regSkema" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-lsp-green focus:border-transparent outline-none text-sm">
+                                <option value="">-- Pilih Skema --</option>
+                                <option value="RPL">Pemrogram Web Muda (RPL)</option>
+                                <option value="TKR">Teknisi Perawatan Berkala Mobil (TKR)</option>
+                                <option value="AKL">Teknisi Akuntansi Muda (AKL)</option>
+                                <option value="OTKP">Asisten Administrasi Kantor (OTKP)</option>
+                                <option value="ATPH">Fasilitator Budidaya Tanaman (ATPH)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Nomor WhatsApp *</label>
+                            <input type="tel" id="regWa" required placeholder="08xxxxxxxxxx" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-lsp-green focus:border-transparent outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Upload Pasfoto / Berkas Persyaratan (JPG/PDF max 2MB)</label>
+                        <input type="file" id="regDoc" class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-lsp-green hover:file:bg-emerald-100">
+                    </div>
+
+                    <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 space-y-1">
+                        <p class="font-bold flex items-center gap-1"><i class="fas fa-exclamation-triangle"></i> Catatan Pendaftaran:</p>
+                        <p>Pastikan Anda telah mengunduh Form APL-01 & APL-02 di menu Download untuk dibawa saat pra-asesmen.</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-lsp-green to-emerald-600 hover:from-emerald-700 hover:to-lsp-green text-white font-bold py-3.5 rounded-xl shadow-lg transition duration-300 text-sm flex items-center justify-center gap-2 border-b-2 border-lsp-yellow">
+                        <i class="fas fa-paper-plane"></i> Kirim Formulir Pendaftaran
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION E: JADWAL SERTIFIKASI -->
+    <section id="jadwal" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Agenda Asesmen</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Jadwal Uji Kompetensi 2026</h2>
+                <p class="text-slate-600 mt-2">Kalender kegiatan pelaksanaan uji sertifikasi per jurusan dan lokasi TUK.</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-md border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 text-xs uppercase tracking-wider border-b">
+                                <th class="p-4">Tanggal Uji</th>
+                                <th class="p-4">Skema / Jurusan</th>
+                                <th class="p-4">Asesor Bertugas</th>
+                                <th class="p-4">Lokasi TUK</th>
+                                <th class="p-4">Kuota / Kuota Sisa</th>
+                                <th class="p-4 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-slate-800"><i class="far fa-calendar-alt text-lsp-green mr-2"></i> 25 - 26 Agu 2026</td>
+                                <td class="p-4 font-semibold text-slate-700">Pemrogram Web Muda (RPL)</td>
+                                <td class="p-4 text-slate-600">Budi Santoso, MET.</td>
+                                <td class="p-4 text-slate-600">Lab Komputer RPL 1</td>
+                                <td class="p-4 text-slate-600">30 Asesi / <span class="text-lsp-green font-bold">5 Sisa</span></td>
+                                <td class="p-4 text-center"><span class="bg-emerald-100 text-lsp-greendark font-bold text-xs px-2.5 py-1 rounded-full">Buka</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-slate-800"><i class="far fa-calendar-alt text-lsp-green mr-2"></i> 28 - 29 Agu 2026</td>
+                                <td class="p-4 font-semibold text-slate-700">Perawatan Berkala Mobil (TKR)</td>
+                                <td class="p-4 text-slate-600">Drs. Sutrisno, M.T.</td>
+                                <td class="p-4 text-slate-600">Workshop Otomotif TKR</td>
+                                <td class="p-4 text-slate-600">25 Asesi / <span class="text-amber-600 font-bold">2 Sisa</span></td>
+                                <td class="p-4 text-center"><span class="bg-emerald-100 text-lsp-greendark font-bold text-xs px-2.5 py-1 rounded-full">Buka</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold text-slate-800"><i class="far fa-calendar-alt text-lsp-green mr-2"></i> 02 - 03 Sep 2026</td>
+                                <td class="p-4 font-semibold text-slate-700">Teknisi Akuntansi Muda (AKL)</td>
+                                <td class="p-4 text-slate-600">Siti Nurhaliza, S.E., Ak.</td>
+                                <td class="p-4 text-slate-600">Lab Akuntansi D-03</td>
+                                <td class="p-4 text-slate-600">35 Asesi / <span class="text-slate-400 font-bold">Penuh</span></td>
+                                <td class="p-4 text-center"><span class="bg-slate-100 text-slate-600 font-bold text-xs px-2.5 py-1 rounded-full">Penuh</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION F: ASESOR KOMPETENSI -->
+    <section id="asesor" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Tim Penguji</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Asesor Kompetensi LSP</h2>
+                <p class="text-slate-600 mt-2">Tenaga penguji tersertifikasi BNSP & berpengalaman di bidangnya.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Asesor Card 1 -->
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 hover:shadow-xl transition duration-300 text-center">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Asesor" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-lsp-green shadow-md mb-4">
+                    <h3 class="font-bold text-lg text-slate-800">Siti Rahmawati, S.T.</h3>
+                    <p class="text-xs font-bold text-lsp-green mt-0.5">No. Reg. MET.000.004812.2021</p>
+                    <p class="text-xs text-slate-500 mt-2">Bidang: Software Engineering & Web Programming</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200 flex justify-center gap-2">
+                        <span class="bg-emerald-100 text-lsp-greendark text-[11px] font-bold px-2.5 py-1 rounded-full">Asesor Metodologi</span>
+                    </div>
+                </div>
+
+                <!-- Asesor Card 2 -->
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 hover:shadow-xl transition duration-300 text-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Asesor" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-lsp-yellow shadow-md mb-4">
+                    <h3 class="font-bold text-lg text-slate-800">Budi Santoso, S.Kom</h3>
+                    <p class="text-xs font-bold text-lsp-green mt-0.5">No. Reg. MET.000.009122.2020</p>
+                    <p class="text-xs text-slate-500 mt-2">Bidang: Jaringan Komputer & Sistem Informasi</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200 flex justify-center gap-2">
+                        <span class="bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-1 rounded-full">Master Asesor</span>
+                    </div>
+                </div>
+
+                <!-- Asesor Card 3 -->
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 hover:shadow-xl transition duration-300 text-center">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Asesor" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-lsp-green shadow-md mb-4">
+                    <h3 class="font-bold text-lg text-slate-800">Drs. Sutrisno, M.T.</h3>
+                    <p class="text-xs font-bold text-lsp-green mt-0.5">No. Reg. MET.000.003310.2019</p>
+                    <p class="text-xs text-slate-500 mt-2">Bidang: Otomotif & Mesin Perkakas</p>
+                    <div class="mt-4 pt-4 border-t border-slate-200 flex justify-center gap-2">
+                        <span class="bg-emerald-100 text-lsp-greendark text-[11px] font-bold px-2.5 py-1 rounded-full">Asesor Metodologi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION G: TEMPAT UJI KOMPETENSI (TUK) -->
+    <section id="tuk" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Sarana Prasarana</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Tempat Uji Kompetensi (TUK)</h2>
+                <p class="text-slate-600 mt-2">Fasilitas laboratorium & workshop terverifikasi BNSP untuk mendukung uji praktik.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 group hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80" alt="TUK RPL" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-5">
+                        <span class="text-[11px] font-extrabold bg-emerald-100 text-lsp-green px-2.5 py-1 rounded-full">TUK Mandiri</span>
+                        <h4 class="font-bold text-lg text-slate-800 mt-2">Laboratorium Komputer Software</h4>
+                        <p class="text-xs text-slate-500 mt-1">Kapasitas 36 PC Core i7, Fiber Optic 100Mbps, AC full & UPS Backup.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 group hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="TUK TKR" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-5">
+                        <span class="text-[11px] font-extrabold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full">TUK Mandiri</span>
+                        <h4 class="font-bold text-lg text-slate-800 mt-2">Workshop Otomotif & Diagnostic</h4>
+                        <p class="text-xs text-slate-500 mt-1">Lengkap dengan Engine Scanner EFI, Car Lift, Wheel Balancer & Tools Set.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-slate-200 group hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80" alt="TUK AKL" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+                    <div class="p-5">
+                        <span class="text-[11px] font-extrabold bg-emerald-100 text-lsp-green px-2.5 py-1 rounded-full">TUK Sewaktu</span>
+                        <h4 class="font-bold text-lg text-slate-800 mt-2">Ruang Simulasi Perkantoran & Akuntansi</h4>
+                        <p class="text-xs text-slate-500 mt-1">Perangkat lunak Akuntansi (MYOB/Accurate), Komputer Kasir & Arsip Digital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION H: HASIL SERTIFIKASI (SEARCH TOOL) -->
+    <section id="hasil" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Pencarian Sertifikat</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Cek Hasil Asesmen Sertifikasi</h2>
+                <p class="text-slate-600 mt-2">Masukkan NISN atau Nama Peserta untuk memverifikasi status kelulusan kompetensi.</p>
+            </div>
+
+            <!-- Search Form Card -->
+            <div class="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-lg">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="searchNisn" placeholder="Masukkan NISN / Nama Peserta (Contoh: 0051234567 atau Andi)" class="flex-1 px-5 py-3.5 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-lsp-green outline-none text-sm">
+                    <button onclick="checkCertificationStatus()" class="bg-lsp-green hover:bg-lsp-greendark text-white font-bold px-8 py-3.5 rounded-2xl shadow-md transition text-sm flex items-center justify-center gap-2">
+                        <i class="fas fa-search"></i> Cari Data
+                    </button>
+                </div>
+
+                <!-- Results Output Area -->
+                <div id="searchResult" class="mt-6 hidden">
+                    <!-- Dynamic Javascript Output -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION I: DOWNLOAD DOKUMEN -->
+    <section id="download" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Pusat Unduhan</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Download Dokumen Sertifikasi</h2>
+                <p class="text-slate-600 mt-2">Unduh berkas APL-01, APL-02, Panduan, SOP, dan format portofolio resmi.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-lsp-green transition">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-100 text-lsp-green rounded-xl flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Formulir APL-01 (Permohonan Sertifikasi)</h4>
+                            <p class="text-xs text-slate-500">PDF • 245 KB</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadFile('APL-01_Formulir.pdf')" class="bg-slate-100 hover:bg-lsp-green hover:text-white text-slate-700 font-bold px-4 py-2 rounded-xl text-xs transition">
+                        <i class="fas fa-download mr-1"></i> Unduh
+                    </button>
+                </div>
+
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-lsp-green transition">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-900 rounded-xl flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Formulir APL-02 (Asesmen Mandiri)</h4>
+                            <p class="text-xs text-slate-500">DOCX • 512 KB</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadFile('APL-02_SelfAssessment.docx')" class="bg-slate-100 hover:bg-lsp-green hover:text-white text-slate-700 font-bold px-4 py-2 rounded-xl text-xs transition">
+                        <i class="fas fa-download mr-1"></i> Unduh
+                    </button>
+                </div>
+
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-lsp-green transition">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-100 text-lsp-green rounded-xl flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Buku Panduan Pelaksanaan Sertifikasi</h4>
+                            <p class="text-xs text-slate-500">PDF • 1.2 MB</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadFile('Panduan_Sertifikasi_LSP.pdf')" class="bg-slate-100 hover:bg-lsp-green hover:text-white text-slate-700 font-bold px-4 py-2 rounded-xl text-xs transition">
+                        <i class="fas fa-download mr-1"></i> Unduh
+                    </button>
+                </div>
+
+                <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-lsp-green transition">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-900 rounded-xl flex items-center justify-center text-xl font-bold">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm">Format Portofolio Asesi (Lampiran)</h4>
+                            <p class="text-xs text-slate-500">ZIP • 3.5 MB</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadFile('Format_Portofolio.zip')" class="bg-slate-100 hover:bg-lsp-green hover:text-white text-slate-700 font-bold px-4 py-2 rounded-xl text-xs transition">
+                        <i class="fas fa-download mr-1"></i> Unduh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION J: BERITA & GALERI -->
+    <section id="berita" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Kegiatan Sekolah</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Berita & Galeri Dokumentasi</h2>
+                <p class="text-slate-600 mt-2">Liputan kegiatan asesmen, foto penyerahan sertifikat, dan video liputan.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-md">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=500&q=80" alt="Kegiatan 1" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs text-lsp-green font-bold">10 Agustus 2026</span>
+                        <h4 class="font-bold text-base text-slate-800 mt-1">Penyerahan 350 Sertifikat BNSP untuk Lulusan SMKN 1 Konawe</h4>
+                        <p class="text-xs text-slate-500 mt-2">Kepala sekolah menyerahkan secara simbolis sertifikat garansi siap kerja...</p>
+                    </div>
+                </div>
+
+                <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-md">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=500&q=80" alt="Kegiatan 2" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs text-lsp-yellowdark font-bold">01 Agustus 2026</span>
+                        <h4 class="font-bold text-base text-slate-800 mt-1">Pelatihan Upgrading Asesor Kompetensi Bersama BNSP</h4>
+                        <p class="text-xs text-slate-500 mt-2">Meningkatkan keahlian metode penilaian asesmen yang objektif & transparan...</p>
+                    </div>
+                </div>
+
+                <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-md">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=500&q=80" alt="Kegiatan 3" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs text-lsp-green font-bold">25 Juli 2026</span>
+                        <h4 class="font-bold text-base text-slate-800 mt-1">Penandatanganan MoU Sertifikasi Mandiri Bersama Perusahaan</h4>
+                        <p class="text-xs text-slate-500 mt-2">Kemitraan strategis penyerapan tenaga kerja tersertifikasi di wilayah Sultra...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION K: FAQ -->
+    <section id="faq" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Pertanyaan Umum</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-3">Frequently Asked Questions (FAQ)</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full text-left p-5 font-bold text-slate-800 flex justify-between items-center hover:bg-slate-50">
+                        <span>Apa itu LSP P1 SMKN 1 Konawe?</span>
+                        <i class="fas fa-chevron-down text-lsp-green transition"></i>
+                    </button>
+                    <div class="px-5 pb-5 hidden text-slate-600 text-sm border-t border-slate-100 pt-3">
+                        LSP P1 SMKN 1 Konawe adalah Lembaga Sertifikasi Profesi Pihak Pertama yang didirikan oleh SMKN 1 Konawe dan terlisensi oleh Badan Nasional Sertifikasi Profesi (BNSP) untuk menguji kompetensi siswa.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full text-left p-5 font-bold text-slate-800 flex justify-between items-center hover:bg-slate-50">
+                        <span>Bagaimana cara mendaftar sertifikasi?</span>
+                        <i class="fas fa-chevron-down text-lsp-green transition"></i>
+                    </button>
+                    <div class="px-5 pb-5 hidden text-slate-600 text-sm border-t border-slate-100 pt-3">
+                        Pendaftaran dapat dilakukan secara online melalui menu Pendaftaran di website ini, dengan mengisi formulir dan mengunggah kelengkapan dokumen pendukung APL-01 & APL-02.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full text-left p-5 font-bold text-slate-800 flex justify-between items-center hover:bg-slate-50">
+                        <span>Berapa lama masa berlaku Sertifikat BNSP?</span>
+                        <i class="fas fa-chevron-down text-lsp-green transition"></i>
+                    </button>
+                    <div class="px-5 pb-5 hidden text-slate-600 text-sm border-t border-slate-100 pt-3">
+                        Sertifikat Kompetensi yang diterbitkan BNSP berlaku selama 3 (tiga) tahun sejak tanggal diterbitkan dan dapat diperpanjang melalui perpanjangan/sertifikasi ulang.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION L: KONTAK -->
+    <section id="kontak" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-extrabold text-lsp-green uppercase tracking-widest bg-emerald-100 px-3.5 py-1.5 rounded-full">Hubungi Kami</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900">Sekretariat LSP SMKN 1 Konawe</h2>
+                    <p class="text-slate-600 text-sm">Jika Anda memiliki pertanyaan mengenai jadwal uji atau verifikasi dokumen, silakan hubungi kami.</p>
+
+                    <div class="space-y-4 text-sm text-slate-700">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-lsp-green flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Alamat Sekolah:</strong>
+                                <p class="text-xs text-slate-500 mt-0.5">Jl. Inolobunggadue No. 45, Unaaha, Kabupaten Konawe, Sulawesi Tenggara 93411</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <strong>WhatsApp / Telepon:</strong>
+                                <p class="text-xs text-slate-500 mt-0.5">+62 822-9876-5432 (Admin LSP)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-lsp-green flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <strong>Email Resmi:</strong>
+                                <p class="text-xs text-slate-500 mt-0.5">lsp@smkn1konawe.sch.id</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4">Kirim Pesan Langsung</h3>
+                        <form onsubmit="handleContactMessage(event)" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Nama Lengkap" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-lsp-green">
+                                <input type="email" placeholder="Email Anda" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-lsp-green">
+                            </div>
+                            <input type="text" placeholder="Subjek Pesan" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-lsp-green">
+                            <textarea rows="4" placeholder="Tuliskan pesan Anda..." required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-lsp-green"></textarea>
+                            <button type="submit" class="bg-lsp-green hover:bg-lsp-greendark text-white font-bold px-6 py-3 rounded-xl shadow-md text-sm transition">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION M: MODAL LOGIN PORTAL ROLE SWITCHER -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border border-slate-100 relative animate-float">
+            <!-- Close Button -->
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-lsp-green to-emerald-600 text-lsp-yellowlight rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-md mb-2">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">Portal Akses Website</h3>
+                <p class="text-xs text-slate-500">Silakan pilih jenis hak akses pengguna sistem LSP</p>
+            </div>
+
+            <!-- Role Selector Tabs -->
+            <div class="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-xl mb-6 text-xs font-bold text-center">
+                <button onclick="setLoginRole('asesi')" id="role-asesi" class="role-btn py-2 rounded-lg bg-white shadow text-lsp-green">Asesi (Peserta)</button>
+                <button onclick="setLoginRole('asesor')" id="role-asesor" class="role-btn py-2 rounded-lg text-slate-600">Asesor</button>
+                <button onclick="setLoginRole('admin')" id="role-admin" class="role-btn py-2 rounded-lg text-slate-600">Admin</button>
+            </div>
+
+            <!-- Login Dynamic Form -->
+            <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label id="loginUserLabel" class="block text-xs font-bold uppercase text-slate-600 mb-1">NISN / Username *</label>
+                    <input type="text" id="loginUsername" required placeholder="Masukkan ID / NISN" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-lsp-green">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Kata Sandi / PIN *</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-lsp-green">
+                </div>
+
+                <div id="roleDescriptionBox" class="p-3 bg-emerald-50 rounded-xl text-xs text-emerald-800">
+                    <p class="font-bold"><i class="fas fa-info-circle"></i> Hak Akses Asesi:</p>
+                    <p>Pendaftaran, Upload Dokumen, Lihat Jadwal, Cek Hasil Asesmen & Unduh Sertifikat Digital.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-lsp-green to-emerald-600 hover:from-emerald-700 hover:to-lsp-green text-white font-bold py-3.5 rounded-xl shadow-md text-sm transition">
+                    Masuk ke Dashboard Sistem
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white pt-16 pb-12 border-t-4 border-lsp-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-lsp-green flex items-center justify-center text-lsp-yellowlight font-bold">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <span class="font-bold text-lg">LSP SMKN 1 KONAWE</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Lembaga Sertifikasi Profesi P1 SMKN 1 Konawe berlisensi resmi BNSP. Menjamin kualifikasi SDM Vokasi Siap Kerja.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-lsp-yellow uppercase mb-4">Navigasi Utama</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="#beranda" class="hover:text-lsp-yellow transition">Beranda</a></li>
+                        <li><a href="#profil" class="hover:text-lsp-yellow transition">Profil LSP</a></li>
+                        <li><a href="#skema" class="hover:text-lsp-yellow transition">Skema Sertifikasi</a></li>
+                        <li><a href="#pendaftaran" class="hover:text-lsp-yellow transition">Pendaftaran Online</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-lsp-yellow uppercase mb-4">Dokumen & Akses</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="#download" class="hover:text-lsp-yellow transition">Formulir APL-01 & APL-02</a></li>
+                        <li><a href="#hasil" class="hover:text-lsp-yellow transition">Cek Status Sertifikat</a></li>
+                        <li><button onclick="openLoginModal()" class="hover:text-lsp-yellow transition">Portal Login Asesi & Asesor</button></li>
+                        <li><a href="#faq" class="hover:text-lsp-yellow transition">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm text-lsp-yellow uppercase mb-4">Media Sosial</h4>
+                    <div class="flex space-x-3 text-slate-400 text-lg">
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-[#25D366] fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-xs text-slate-500">
+                <p>&copy; 2026 LSP P1 SMKN 1 Konawe. Hak Cipta Dilindungi Undang-Undang.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. SLIDER CAROUSEL LOGIC ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-item');
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('opacity-100', i === index);
+                slide.classList.toggle('opacity-0', i !== index);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 5000);
+
+        // --- 2. MOBILE MENU DRAWER ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- 3. PROFILE TABS SWITCHING ---
+        function switchProfileTab(tabName) {
+            document.querySelectorAll('.profile-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.profile-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-lsp-green', 'text-white', 'shadow');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabName);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            activeBtn.classList.add('bg-lsp-green', 'text-white', 'shadow');
+        }
+
+        // --- 4. SKEMA JURUSAN DATA & FILTER ---
+        const jurusanData = {
+            rpl: {
+                title: "Jurusan 1: Rekayasa Perangkat Lunak (RPL)",
+                skema: "Skema Sertifikasi Kualifikasi II Pemrogram Web Muda (Junior Web Programmer)",
+                units: [
+                    "J.620100.005.01 - Mengimplementasikan User Interface Web",
+                    "J.620100.009.01 - Menggunakan Spesifikasi Program",
+                    "J.620100.017.02 - Mengimplementasikan Pemrograman Terstruktur",
+                    "J.620100.019.02 - Menggunakan Struktur Data pada Pemrograman"
+                ],
+                syarat: "Siswa aktif SMKN 1 Konawe program keahlian RPL kelas XII yang telah menyelesaikan seluruh mata pelajaran produktif.",
+                dokumen: "Fotokopi Raport Semester 1-5, Pasfoto 3x4 (2 Lembar background merah), Form APL-01 & APL-02 terisi.",
+                durasi: "2 Hari Pelaksanaan (Uji Teori & Praktik Unjuk Kerja)",
+                asesor: "Siti Rahmawati, S.T. & Budi Santoso, S.Kom"
+            },
+            tkr: {
+                title: "Jurusan 2: Teknik Kendaraan Ringan (TKR)",
+                skema: "Skema Sertifikasi Kualifikasi II Teknisi Perawatan Berkala Kendaraan Ringan",
+                units: [
+                    "OTO.KR01.001.01 - Melaksanakan Pemeliharaan Servis Berkala Mesin",
+                    "OTO.KR01.010.01 - Memelihara Sistem Rem Konvensional & ABS",
+                    "OTO.KR01.016.01 - Memelihara Sistem Kelistrikan Bodi",
+                    "OTO.KR01.020.01 - Memelihara Sistem Injeksi Bahan Bakar EFI"
+                ],
+                syarat: "Siswa kelas XII TKR yang telah lulus Praktik Kerja Lapangan (PKL) di industri otomotif.",
+                dokumen: "Sertifikat PKL, Pasfoto 3x4 (2 Lembar background merah), Form APL-01 & APL-02 terisi.",
+                durasi: "1 Hari Pelaksanaan Praktik Bengkel",
+                asesor: "Drs. Sutrisno, M.T."
+            },
+            akl: {
+                title: "Jurusan 3: Akuntansi dan Keuangan Lembaga (AKL)",
+                skema: "Skema Sertifikasi Kualifikasi II Teknisi Akuntansi Muda",
+                units: [
+                    "M.692000.001.02 - Menerapkan Prinsip Praktik Professional dalam Bekerja",
+                    "M.692000.007.02 - Memproses Buku Jurnal & Buku Besar",
+                    "M.692000.013.02 - Menyusun Laporan Keuangan Perusahaan Jasa & Dagang",
+                    "M.692000.022.02 - Mengoperasikan Aplikasi Komputer Akuntansi (MYOB)"
+                ],
+                syarat: "Siswa aktif AKL tingkat XII yang menguasai pengerjaan siklus akuntansi manual & komputer.",
+                dokumen: "KTP/Kartu Pelajar, Pasfoto 3x4 (2 Lembar background merah), Form APL-01 & APL-02.",
+                durasi: "2 Hari Uji Praktik Komputer & Wawancara",
+                asesor: "Siti Nurhaliza, S.E., Ak."
+            },
+            otkp: {
+                title: "Jurusan 4: Otomatisasi & Tata Kelola Perkantoran (OTKP)",
+                skema: "Skema Sertifikasi Kualifikasi II Asisten Administrasi Perkantoran",
+                units: [
+                    "N.821100.001.02 - Penanganan Surat / Dokumen Perkantoran",
+                    "N.821100.004.02 - Mengelola Arsip Sistem Kartotek & Digital",
+                    "N.821100.028.02 - Melakukan Komunikasi Melalui Telepon",
+                    "N.821100.030.01 - Membuat Dokumen Surat Menurat Resmi"
+                ],
+                syarat: "Siswa aktif OTKP kelas XII.",
+                dokumen: "Fotokopi Raport, Pasfoto 3x4 (2 Lembar), Form APL-01 & APL-02.",
+                durasi: "1 Hari Uji Praktik Perkantoran",
+                asesor: "Hj. Erna Wati, S.Pd."
+            },
+            atph: {
+                title: "Jurusan 5: Agribisnis Tanaman Pangan & Hortikultura (ATPH)",
+                skema: "Skema Sertifikasi Kualifikasi II Fasilitator Budidaya Tanaman Hortikultura",
+                units: [
+                    "A.011100.001.01 - Siapkan Lahan Budidaya Tanaman",
+                    "A.011100.005.01 - Melakukan Pembibitan Tanaman Pangan",
+                    "A.011100.012.01 - Mengendalikan Organisme Pengganggu Tanaman (OPT)",
+                    "A.011100.018.01 - Melakukan Panen & Pascapanen"
+                ],
+                syarat: "Siswa aktif ATPH kelas XII yang mengikuti program green house.",
+                dokumen: "Sertifikat Magang Tani, Pasfoto 3x4 (2 Lembar), Form APL-01 & APL-02.",
+                durasi: "1 Hari Uji Kebun & Laboratorium",
+                asesor: "Ir. Kurniawan, M.P."
+            }
+        };
+
+        function filterJurusan(jurKey) {
+            document.querySelectorAll('.jurusan-btn').forEach(btn => {
+                btn.classList.remove('bg-lsp-green', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            document.getElementById('jur-' + jurKey).classList.remove('bg-slate-100', 'text-slate-600');
+            document.getElementById('jur-' + jurKey).classList.add('bg-lsp-green', 'text-white', 'shadow-md');
+
+            const data = jurusanData[jurKey];
+            const detailCard = document.getElementById('skemaDetailCard');
+
+            let unitsList = data.units.map(u => `<li class="flex items-start gap-2"><i class="fas fa-check-circle text-lsp-green mt-1"></i> <span>${u}</span></li>`).join('');
+
+            detailCard.innerHTML = `
+                <div class="space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full uppercase">${data.title}</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-2">${data.skema}</h3>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800 uppercase mb-3 flex items-center gap-2">
+                                <i class="fas fa-list-ol text-lsp-green"></i> Unit Kompetensi (SKKNI):
+                            </h4>
+                            <ul class="space-y-2 text-slate-600 text-sm">
+                                ${unitsList}
+                            </ul>
+                        </div>
+
+                        <div class="space-y-4 text-sm text-slate-600">
+                            <div class="p-4 bg-white rounded-2xl border">
+                                <strong><i class="fas fa-user-check text-lsp-yellow"></i> Persyaratan Peserta:</strong>
+                                <p class="mt-1 text-xs text-slate-500">${data.syarat}</p>
+                            </div>
+
+                            <div class="p-4 bg-white rounded-2xl border">
+                                <strong><i class="fas fa-folder text-lsp-yellow"></i> Dokumen Persyaratan:</strong>
+                                <p class="mt-1 text-xs text-slate-500">${data.dokumen}</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="p-3 bg-emerald-50 rounded-xl">
+                                    <span class="block font-bold text-emerald-900">Lama Pelaksanaan:</span>
+                                    <span>${data.durasi}</span>
+                                </div>
+                                <div class="p-3 bg-amber-50 rounded-xl">
+                                    <span class="block font-bold text-amber-900">Asesor Kompetensi:</span>
+                                    <span>${data.asesor}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize with RPL default
+        filterJurusan('rpl');
+
+        // --- 5. SEARCH SERTIFIKASI CHECKER LOGIC ---
+        const sampleCertificates = [
+            { nisn: "0051234567", name: "Andi Pratama", jurusan: "Rekayasa Perangkat Lunak", status: "KOMPETEN", noSertifikat: "BNSP-72010-2026-000189" },
+            { nisn: "0059876543", name: "Siti Rahmi", jurusan: "Akuntansi & Keuangan Lembaga", status: "KOMPETEN", noSertifikat: "BNSP-72010-2026-000190" },
+            { nisn: "0051122334", name: "Budi Kusuma", jurusan: "Teknik Kendaraan Ringan", status: "BELUM KOMPETEN", noSertifikat: "-" }
+        ];
+
+        function checkCertificationStatus() {
+            const query = document.getElementById('searchNisn').value.trim().toLowerCase();
+            const resultBox = document.getElementById('searchResult');
+
+            if (!query) {
+                alert('Silakan masukkan NISN atau Nama terlebih dahulu.');
+                return;
+            }
+
+            const match = sampleCertificates.find(c => c.nisn.includes(query) || c.name.toLowerCase().includes(query));
+
+            resultBox.classList.remove('hidden');
+
+            if (match) {
+                const isKompeten = match.status === 'KOMPETEN';
+                resultBox.innerHTML = `
+                    <div class="p-6 rounded-2xl border ${isKompeten ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200'}">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-xs font-bold ${isKompeten ? 'text-emerald-800 bg-emerald-200' : 'text-red-800 bg-red-200'} px-3 py-1 rounded-full uppercase">${match.status}</span>
+                                <h4 class="text-xl font-bold text-slate-900 mt-2">${match.name}</h4>
+                                <p class="text-xs text-slate-500">NISN: ${match.nisn} | Program: ${match.jurusan}</p>
+                                ${isKompeten ? `<p class="text-xs font-bold text-lsp-green mt-1">No. Blanko Sertifikat BNSP: ${match.noSertifikat}</p>` : ''}
+                            </div>
+                            ${isKompeten ? `
+                                <button onclick="alert('Mengunduh Pratinjau Sertifikat Digital ${match.name}...')" class="bg-lsp-green text-white font-bold px-4 py-2 rounded-xl text-xs hover:bg-lsp-greendark transition">
+                                    <i class="fas fa-certificate mr-1"></i> Unduh Sertifikat
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultBox.innerHTML = `
+                    <div class="p-6 rounded-2xl bg-amber-50 border border-amber-200 text-center">
+                        <i class="fas fa-search-minus text-amber-500 text-3xl mb-2"></i>
+                        <h4 class="font-bold text-slate-800">Data Tidak Ditemukan</h4>
+                        <p class="text-xs text-slate-500 mt-1">Gunakan kata kunci sampel pencarian seperti: "0051234567" atau "Andi".</p>
+                    </div>
+                `;
+            }
+        }
+
+        // --- 6. REGISTRATION & CONTACT FORM SIMULATOR ---
+        function handleRegistration(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            alert(`Terima kasih, ${name}! Pendaftaran Anda telah tercatat di sistem LSP SMKN 1 Konawe. Nomor Pendaftaran ID: LSP-2026-${Math.floor(1000 + Math.random() * 9000)}.`);
+            document.getElementById('regForm').reset();
+        }
+
+        function handleContactMessage(e) {
+            e.preventDefault();
+            alert('Pesan Anda telah terkirim ke Sekretariat LSP SMKN 1 Konawe. Tim kami akan merespons melalui WA/Email.');
+        }
+
+        function downloadFile(fileName) {
+            alert(`Memproses unduhan file: ${fileName}`);
+        }
+
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.fa-chevron-down');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // --- 7. MODAL LOGIN PORTAL LOGIC ---
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        let currentRole = 'asesi';
+
+        function setLoginRole(role) {
+            currentRole = role;
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow', 'text-lsp-green');
+                btn.classList.add('text-slate-600');
+            });
+            
+            const activeBtn = document.getElementById('role-' + role);
+            activeBtn.classList.add('bg-white', 'shadow', 'text-lsp-green');
+
+            const descBox = document.getElementById('roleDescriptionBox');
+            if (role === 'asesi') {
+                descBox.innerHTML = `<p class="font-bold"><i class="fas fa-info-circle"></i> Hak Akses Asesi (Peserta):</p><p>Pendaftaran, Upload Dokumen, Melihat Jadwal, Melihat Hasil Sertifikasi, Unduh Sertifikat.</p>`;
+            } else if (role === 'asesor') {
+                descBox.innerHTML = `<p class="font-bold"><i class="fas fa-user-shield"></i> Hak Akses Asesor Kompetensi:</p><p>Jadwal Asesmen Tugas, Penilaian Rubrik Asesi, Cetak Berita Acara FR.IA.01.</p>`;
+            } else if (role === 'admin') {
+                descBox.innerHTML = `<p class="font-bold"><i class="fas fa-cogs"></i> Hak Akses Admin Website:</p><p>Kelola Data Peserta, Kelola Asesor, Kelola Jadwal TUK & Master Skema Sertifikasi.</p>`;
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const user = document.getElementById('loginUsername').value;
+            alert(`Berhasil Login sebagai [${currentRole.toUpperCase()}] dengan Username: ${user}. Selamat Datang di Dashboard LSP SMKN 1 Konawe!`);
+            closeLoginModal();
+        }
+
+        // --- 8. STATS ANIMATED COUNTER ---
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 50;
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        window.onload = function() {
+            animateCounters();
+        };
+    </script>
+</body>
+</html>
